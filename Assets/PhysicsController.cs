@@ -8,7 +8,12 @@ public class PhysicsController : MonoBehaviour
     public SpriteRenderer thisSprite;
     public Rigidbody2D thisRigidbody2D;
     public float force = 10f;
-   
+
+    //Particle System
+    public GameObject dustParticles;
+    public GameObject splashParticles;
+
+
 
     public GroundCheck2 groundCheckScript;
     public float gravityInAir;
@@ -22,6 +27,7 @@ public class PhysicsController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 thisRigidbody2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+                Dust();
             }
 
            
@@ -59,5 +65,18 @@ public class PhysicsController : MonoBehaviour
         }
 
       
+    }
+
+    void Dust()
+    {
+        GameObject dust = Instantiate(dustParticles, gameObject.transform.position, Quaternion.identity);
+        dust.GetComponent<ParticleSystem>().Play();
+    }
+
+    void Splash()
+    {
+        GameObject splash = Instantiate(dustParticles, gameObject.transform.position, Quaternion.identity);
+        splash.GetComponent<ParticleSystem>().Play();
+
     }
 }
